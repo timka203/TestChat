@@ -1,0 +1,55 @@
+﻿<Window x:Class="StepChat.UI2_2.ChatWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StepChat.UI2_2"
+        mc:Ignorable="d"
+        Title="ChatWindow" Height="450" Width="800">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Right" Background="Red" Width="250">
+            <StackPanel  VerticalAlignment="Bottom" Orientation="Horizontal"  >
+                <Label  VerticalAlignment="Bottom" HorizontalAlignment="Right">Your ID:</Label>
+                <TextBlock x:Name="lbId" HorizontalAlignment="Center" VerticalAlignment="Center"> </TextBlock>
+            </StackPanel>
+            <StackPanel>
+                <ListView  Name="ContactList" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible" Height="100" MouseDoubleClick="ContactList_MouseDoubleClick" MouseRightButtonUp="ContactList_MouseDoubleClick" >
+
+                <ListView.View>
+
+                    <GridView>
+                        <GridViewColumn Header="UserName" Width="75" DisplayMemberBinding="{Binding ContactNickname}" />
+                        <GridViewColumn Header="IsOnline" Width="75" DisplayMemberBinding="{Binding IsOnline}" />
+                            <GridViewColumn Header="ID" Width="75" DisplayMemberBinding="{Binding ApplicationUserId}" />
+
+                        </GridView>
+                </ListView.View>
+
+            </ListView>
+        </StackPanel>
+        <StackPanel>
+        <ListView  Name="GroupList" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible" Height="100" MouseDoubleClick="GroupList_MouseDoubleClick"  MouseRightButtonUp="GroupList_MouseDoubleClick" >
+
+                <ListView.View>
+
+                    <GridView>
+                            <GridViewColumn Header="Name" Width="250"   DisplayMemberBinding="{Binding Title }"   />
+                       
+                    </GridView>
+                </ListView.View>
+
+            </ListView>
+        </StackPanel>
+            <StackPanel>
+                <Button x:Name="btCreate" Click="btCreate_Click">Create Group</Button>
+            </StackPanel>
+         
+
+
+        </StackPanel>
+       
+
+        <TabControl x:Name="Chats"></TabControl>
+
+    </DockPanel>
+</Window>
