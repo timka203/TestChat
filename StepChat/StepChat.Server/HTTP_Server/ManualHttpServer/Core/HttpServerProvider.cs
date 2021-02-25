@@ -40,8 +40,18 @@ namespace ManualHttpServer.Core
 
             while (true)
             {
-                var context = _httpListener.GetContext();
-                OnRequestHandler(context);
+                try
+                {
+                    var context = _httpListener.GetContext();
+                    OnRequestHandler(context);
+
+                }
+                catch (Exception)
+                {
+
+                
+                }
+            
             }     
         }
 

@@ -85,7 +85,7 @@ namespace StepChat.UI2_2
 
         public static void Start(string url)
         {
-            webSocket = new WebSocket("ws://127.0.0.1:15000");
+            webSocket = new WebSocket("ws://192.168.1.7:15000");
             server = new WebSocketServer(url);
             
             webSocket.OnMessage += OnMessageHandler;

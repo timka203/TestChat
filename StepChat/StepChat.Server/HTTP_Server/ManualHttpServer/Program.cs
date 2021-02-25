@@ -13,7 +13,7 @@ namespace StepChat.Server
         {
           
 
-            var address = new Uri("http://127.0.0.1:15006/");
+            var address = new Uri("http://192.168.1.7:15006/");
 
             _routingProvider = new RoutingProvider();
             _httpServerProvider = new HttpServerProvider(address, _routingProvider);

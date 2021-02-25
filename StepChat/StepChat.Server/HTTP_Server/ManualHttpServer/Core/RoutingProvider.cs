@@ -27,6 +27,7 @@ namespace ManualHttpServer.Core
 
         public IResourceProvider GetResourceProviderByRoute(string route)
         {
+
             if (_routes.ContainsKey(route))
             {
                 var provider = Activator.CreateInstance(_routes[route]);
@@ -34,7 +35,7 @@ namespace ManualHttpServer.Core
             }
             else
             {
-                throw new InvalidOperationException("Route not found!");
+                 throw new InvalidOperationException("Route not found!");
             }
         }
 

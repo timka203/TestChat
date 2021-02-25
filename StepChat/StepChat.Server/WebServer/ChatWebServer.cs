@@ -244,7 +244,7 @@ namespace StepChat.Server
 
            public static void StartServer()
             {
-                var address = "ws://127.0.0.1:15000";
+                var address = "ws://192.168.1.7:15000";
                 var ws = new WebSocketServer(address);
        
             

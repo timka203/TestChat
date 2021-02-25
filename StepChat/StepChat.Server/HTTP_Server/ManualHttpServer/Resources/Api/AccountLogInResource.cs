@@ -18,7 +18,7 @@ namespace ManualHttpServer.Resources.Api
     [ResourceRoute("api/auth/login")]
     public class AccountLogInResource : BaseResourceProvider
     {
-       WebSocket webSocket = new WebSocket("ws://127.0.0.1:15000");
+       WebSocket webSocket = new WebSocket("ws://192.168.1.7:15000");
         private void ProcessInternal()
         {
         }

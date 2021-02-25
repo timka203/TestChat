@@ -10,12 +10,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace StepChat.UI2_2
+
 {
    public  class HTTP_SocketForUser
     {
         public static async Task<JObject> Auth_UserAsync(string login,string Password)
         {
-            var serverAddress = new Uri("http://127.0.0.1:15006/api/auth/login");
+            var serverAddress = new Uri("http://192.168.1.7:15006/api/auth/login");
 
             User requestObject = new User() { ContactNickname = login, Password = Password };
 
@@ -49,7 +50,7 @@ namespace StepChat.UI2_2
         }
         public static async Task<JObject> Create_Group(List<User> users, string name, Local_Group.GroupTypes type )
         {
-            var serverAddress = new Uri("http://127.0.0.1:15006/api/auth/CreateGroup");
+            var serverAddress = new Uri("http://192.168.1.7:15006/api/auth/CreateGroup");
 
             Local_Group requestObject = new Local_Group() { Title = name, Users = users, GroupType=type };
 
