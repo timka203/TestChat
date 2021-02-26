@@ -45,7 +45,6 @@ namespace StepChat.Server
                         {
 
 
-
                         }
                         break;
                     case MessageTypes.FromHttpToWeb:
@@ -54,10 +53,6 @@ namespace StepChat.Server
                         MessageContainer<KeyValuePair<string, string>> message = JsonConvert.DeserializeObject<MessageContainer<KeyValuePair<string, string>>>(e.Data);
 
                         HTTPidList.Add(message.Body.Key, message.Body.Value);
-
-
-
-
 
                     }
                 break;
@@ -72,14 +67,8 @@ namespace StepChat.Server
                         {
 
 
-                            test.SendMessageToClient(WebSocketServer, idList.Where(w => w.Key == item.ContactNickname).FirstOrDefault().Value, e.Data);
+                            Sender.SendMessageToClient(WebSocketServer, idList.Where(w => w.Key == item.ContactNickname).FirstOrDefault().Value, e.Data);
                         }
-
-
-
-
-
-
 
                         }
                         break;
@@ -92,11 +81,6 @@ namespace StepChat.Server
                         {
                             idList.Add(message.Body.Key, ID);
                         }
-
-
-
-                        
-
 
                             
                         }
@@ -115,7 +99,7 @@ namespace StepChat.Server
                             {
 
 
-                                test.SendMessageToClient(WebSocketServer, idList.Where(w => w.Key == item.ContactNickname).FirstOrDefault().Value, JsonConvert.SerializeObject(new MessageContainer<MessagesInfo>() { MessageType = MessageTypes.ToServerMessage, Body = new MessagesInfo() { messages = messages} }));
+                                Sender.SendMessageToClient(WebSocketServer, idList.Where(w => w.Key == item.ContactNickname).FirstOrDefault().Value, JsonConvert.SerializeObject(new MessageContainer<MessagesInfo>() { MessageType = MessageTypes.ToServerMessage, Body = new MessagesInfo() { messages = messages} }));
 
                             }
 
@@ -123,11 +107,7 @@ namespace StepChat.Server
                                 catch (Exception)
                                 {
 
-
                                 }
-
-
-
                             
                         }
                         break;
@@ -136,17 +116,11 @@ namespace StepChat.Server
                         break;
                 }
 
-
-
-
-
-
-
             }
 
         }
 
-        public class test
+        public class Sender
         {
             public static void SendMessageToClient(WebSocketServer ws,
                string clientId, string message)
@@ -190,7 +164,7 @@ namespace StepChat.Server
 
                 foreach (var session in host.Sessions.Sessions.ToList())
                 {
-                    test.SendMessageToClient(ws, session.ID, message);
+                    Sender.SendMessageToClient(ws, session.ID, message);
                 }
             foreach (var item in SocketConnectionHandler.GroupList)
             {
@@ -201,7 +175,7 @@ namespace StepChat.Server
                         {
                             if (SocketConnectionHandler.idList.Any(w => w.Key == user.ContactNickname))
                             {
-                                test.SendMessageToClient(ws, SocketConnectionHandler.idList.Where(w => w.Key == user.ContactNickname).SingleOrDefault().Value, JsonConvert.SerializeObject(new MessageContainer<List<Local_Group>>() { MessageType = MessageTypes.GroupListUpdate, Body = SocketConnectionHandler.GroupList.Where(w => w.Users.Any(a => a.ContactNickname == user.ContactNickname)).ToList() }));
+                                Sender.SendMessageToClient(ws, SocketConnectionHandler.idList.Where(w => w.Key == user.ContactNickname).SingleOrDefault().Value, JsonConvert.SerializeObject(new MessageContainer<List<Local_Group>>() { MessageType = MessageTypes.GroupListUpdate, Body = SocketConnectionHandler.GroupList.Where(w => w.Users.Any(a => a.ContactNickname == user.ContactNickname)).ToList() }));
 
                             }
 

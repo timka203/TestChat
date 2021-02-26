@@ -4,6 +4,7 @@ using StepChat.Common.CommonModels;
 using StepChat.Server.DB;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -28,10 +29,19 @@ namespace StepChat.UI2_2
         public MainWindow()
         {
             InitializeComponent();
+         
+        }
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            // for .NET Core you need to add UseShellExecute = true
+            // see https://docs.microsoft.com/dotnet/api/system.diagnostics.processstartinfo.useshellexecute#property-value
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+            e.Handled = true;
         }
 
         private async void Submit_Click(object sender, RoutedEventArgs e)
         {
+            // set url for local web server
             string url;
             if (address.Text != "")
             {
@@ -54,7 +64,7 @@ namespace StepChat.UI2_2
 
             var parsed = await HTTP_SocketForUser.Auth_UserAsync(login.Text, Password.Password);
 
-
+           
 
             if (parsed!=null)
             {

@@ -28,14 +28,14 @@ namespace StepChat.UI2_2
             {
                 case MessageTypes.ContactListStatusUpdate:
                     {
-                        test.SendMessageToClient(server, AppConnectionHandler.AppList.Where(w => w.Value == "ChatWindow").FirstOrDefault().Key, e.Data);
+                        Sender.SendMessageToClient(server, AppConnectionHandler.AppList.Where(w => w.Value == "ChatWindow").FirstOrDefault().Key, e.Data);
 
 
                     }
                     break;
                 case MessageTypes.GroupListUpdate:
                     {
-                        test.SendMessageToClient(server, AppConnectionHandler.AppList.Where(w => w.Value == "ChatWindow").FirstOrDefault().Key, e.Data);
+                        Sender.SendMessageToClient(server, AppConnectionHandler.AppList.Where(w => w.Value == "ChatWindow").FirstOrDefault().Key, e.Data);
 
 
                     }
@@ -46,7 +46,7 @@ namespace StepChat.UI2_2
                         {
 
 
-                            test.SendMessageToClient(server, item.Key, e.Data);
+                            Sender.SendMessageToClient(server, item.Key, e.Data);
                         }
 
 
@@ -62,7 +62,7 @@ namespace StepChat.UI2_2
                     break;
                 case MessageTypes.ToServerMessage:
                     {
-                        Test2(e);
+                        SendToServer(e);
                         
 
                     }
@@ -73,13 +73,13 @@ namespace StepChat.UI2_2
             }
 
     }
-        private static void Test2(MessageEventArgs e)
+        private static void SendToServer(MessageEventArgs e)
         {
             foreach (var item in AppConnectionHandler.AppList.Where(w => w.Value == JsonConvert.DeserializeObject<MessageContainer<MessagesInfo>>(e.Data).Body.messages[0].To))
             {
 
 
-                test.SendMessageToClient(server, item.Key, e.Data);
+                Sender.SendMessageToClient(server, item.Key, e.Data);
             }
         }
 
@@ -184,7 +184,7 @@ namespace StepChat.UI2_2
         //}
 
     }
-    public class test
+    public class Sender
     {
         public static void SendMessageToClient(WebSocketServer ws,
            string clientId, string message)

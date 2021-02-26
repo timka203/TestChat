@@ -40,12 +40,12 @@ namespace StepChat.Web_2_0.Controllers
                 }
 
                 return RedirectToAction("Success");
-        }
+            }
             catch
             {
                 return View();
-    }
-}
+            }
+        }
 
         // GET: Chat/Edit/5
         public ActionResult Edit(int id)

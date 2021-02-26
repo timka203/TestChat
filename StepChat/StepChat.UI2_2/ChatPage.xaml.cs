@@ -39,6 +39,7 @@ namespace StepChat.UI2_2
             AcceptSocketMessages();
             InitializeComponent();
         }
+        //websocket logic
         private void OnMessageHandler(object sender, MessageEventArgs e)
         {
             var containerMetainfo = JsonConvert
@@ -66,9 +67,14 @@ namespace StepChat.UI2_2
                    .DeserializeObject<MessageContainer<MessagesInfo>>(e.Data);
                 Dispatcher.BeginInvoke(new Action(() =>
                 {
-                    foreach (var item in concreteContainer.Body.messages.OrderBy(w=>w.DepartureDate))
+                    if (MessageList.Children.Count == 0)
                     {
-                        Add_Message(item);
+
+
+                        foreach (var item in concreteContainer.Body.messages.OrderBy(w => w.DepartureDate))
+                        {
+                            Add_Message(item);
+                        }
                     }
 
 
@@ -78,6 +84,7 @@ namespace StepChat.UI2_2
 
             }
         }
+        //websocket logic
         private void AcceptSocketMessages()
         {
             _webSocket.OnMessage += (sender, e) =>
@@ -85,10 +92,6 @@ namespace StepChat.UI2_2
             _webSocket.Connect();
             _webSocket.Send(JsonConvert.SerializeObject(new MessageContainer<string>() { MessageType = MessageTypes.AppMessage, Body = GroupId }));
             _webSocket.Send(JsonConvert.SerializeObject(new MessageContainer<KeyValuePair<string,string>>() { MessageType = MessageTypes.ToServerMessage, Body = new KeyValuePair<string, string>(GroupId,user) }));
-
-          
-
-
         }
 
         private void Add_Message(MessageTo message)
@@ -115,7 +118,7 @@ namespace StepChat.UI2_2
 
             }));
         }
-
+        //Sending message
         private void send_Click(object sender, RoutedEventArgs e)
         {
             var mes = new MessageTo() { DepartureDate = DateTime.Now, From = user, MessageText = message.Text, To = GroupId };

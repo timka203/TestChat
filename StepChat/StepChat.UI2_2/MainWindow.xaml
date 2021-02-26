@@ -20,6 +20,11 @@
             <Label>Password</Label>
             <PasswordBox x:Name="Password">   </PasswordBox>
             <Button x:Name="Submit" Click="Submit_Click">Submit</Button>
+            <TextBlock>           
+    <Hyperlink NavigateUri="https://localhost:44310/chat/create" RequestNavigate="Hyperlink_RequestNavigate">
+        Click here to Sign in
+    </Hyperlink>
+            </TextBlock>
         </StackPanel>
     </Grid>
 </Window>

@@ -34,7 +34,7 @@ namespace StepChat.UI2_2
         List<User> users= new List<User>();
 
         public ChatWindow(string user,string url)
-        {
+        { 
             this.username = user;
             this.url = url;
             _webSocket = new WebSocket(url);
@@ -44,7 +44,7 @@ namespace StepChat.UI2_2
             InitializeComponent();
 
         }
-
+        //websocket logic
         private void OnMessageHandler(object sender, MessageEventArgs e)
         {
             var containerMetainfo = JsonConvert
@@ -88,6 +88,7 @@ namespace StepChat.UI2_2
                 }));
             }
         }
+        //websocket logic
         private void AcceptSocketMessages()
         {
             _webSocket.OnMessage += (sender, e) =>
@@ -100,8 +101,11 @@ namespace StepChat.UI2_2
                     
         }
 
+        //opens PersonToPerson chat
         private async void ContactList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        { string id;
+        { 
+            
+            string id;
          ContactItemModel model= ((sender as ListView).SelectedItems[0]) as ContactItemModel;
             try
             {
@@ -119,6 +123,7 @@ namespace StepChat.UI2_2
         }
 
 
+        //opens group chat
         private async void GroupList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             string id;
@@ -131,7 +136,7 @@ namespace StepChat.UI2_2
             }));
 
         }
-
+        //opens Create_Group_Window
         private void btCreate_Click(object sender, RoutedEventArgs e)
         {
             Create_Group_Window create_Group_Window = new Create_Group_Window(users);

@@ -12,8 +12,16 @@ namespace StepChat.Server.DB
         private static DB_Model db = new DB_Model();
         public static void Add_User(string Login, string Password)
         {
-            db.User.Add(new DB.User() { Password = Password, ContactNickname = Login });
-            db.SaveChanges();
+            if (!db.User.Any(w => w.ContactNickname == Login))
+            {
+                db.User.Add(new DB.User() { Password = Password, ContactNickname = Login });
+                db.SaveChanges();
+
+            }
+            else {
+                throw new ArgumentException();
+            }
+        
 
         }
 

@@ -16,9 +16,7 @@ using System.Windows.Shapes;
 
 namespace StepChat.UI2_2
 {
-    /// <summary>
-    /// Логика взаимодействия для Create_Group_Window.xaml
-    /// </summary>
+
     public partial class Create_Group_Window : Window
     {
         private List<User> users;
@@ -29,7 +27,7 @@ namespace StepChat.UI2_2
             this.users = users;
             InitializeComponent();
         }
-
+        //Add user to group
         private void AddToGroup_Click(object sender, RoutedEventArgs e)
         {
             ContactList.Items.Add(users.Where(w => w.Id == Convert.ToInt32(tbUserId.Text)));
